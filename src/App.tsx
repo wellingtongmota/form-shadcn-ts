@@ -1,9 +1,9 @@
-import { Button } from "./components/ui/button"
+import { FormSendMessage } from "./components/FormSendMessage"
 
 export default function App() {
   return (
-    <div className="p-2">
-      <Button variant="outline">Teste</Button>
+    <div className="flex min-h-screen items-center justify-center">
+      <FormSendMessage />
     </div>
   )
 }
