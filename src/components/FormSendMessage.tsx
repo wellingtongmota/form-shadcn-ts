@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/form"
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Nome inválido" }),
-  email: z.string().email({ message: "Email inválido" }),
-  subject: z.string().min(2, { message: "Assunto inválido" }),
-  message: z.string().min(2, { message: "Mensagem inválida" })
+  name: z.string().min(2, { message: "Invalid name" }),
+  email: z.string().email({ message: "Invalid email" }),
+  subject: z.string().min(2, { message: "Invalid subject" }),
+  message: z.string().min(2, { message: "Invalid message" })
 })
 
 export function FormSendMessage() {
@@ -41,10 +41,10 @@ export function FormSendMessage() {
   async function handleSubmit(values: z.infer<typeof formSchema>) {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     toast({
-      title: "Modifique o onSubmit para a sua aplicação",
+      title: "Modify the onSubmit for your application",
       description: (
         <>
-          Dados enviados:
+          Data sent:
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">
               {JSON.stringify(values, null, 2)}
@@ -67,7 +67,7 @@ export function FormSendMessage() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Nome</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input id="name" {...field} />
                 </FormControl>
@@ -83,7 +83,7 @@ export function FormSendMessage() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel>Email adress</FormLabel>
                 <FormControl>
                   <Input id="email" {...field} />
                 </FormControl>
@@ -99,7 +99,7 @@ export function FormSendMessage() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Assunto</FormLabel>
+                <FormLabel>Subject</FormLabel>
                 <FormControl>
                   <Input id="subject" {...field} />
                 </FormControl>
@@ -114,13 +114,9 @@ export function FormSendMessage() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mensagem</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Insira a sua mensagem aqui..."
-                  // className="resize-none"
-                  {...field}
-                />
+                <Textarea placeholder="Enter your message here..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -134,7 +130,7 @@ export function FormSendMessage() {
             type="reset"
             onClick={() => form.reset()}
           >
-            Limpar
+            Reset
           </Button>
 
           <Button
@@ -145,10 +141,10 @@ export function FormSendMessage() {
             {form.formState.isSubmitting ? (
               <>
                 <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                Enviando
+                Submitting
               </>
             ) : (
-              "Enviar"
+              "Submit"
             )}
           </Button>
         </div>
