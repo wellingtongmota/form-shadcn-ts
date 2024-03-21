@@ -44,7 +44,7 @@ export function FormSendMessage() {
   return (
     <Form {...form}>
       <form
-        className="space-y-4 max-w-md w-full p-2"
+        className="space-y-4 w-full"
         onSubmit={form.handleSubmit(handleSubmit)}
       >
         <FormField
