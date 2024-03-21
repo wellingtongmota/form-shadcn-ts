@@ -3,9 +3,11 @@
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
+import { Textarea } from "./ui/textarea"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useToast } from "./ui/use-toast"
 import {
   Form,
   FormControl,
@@ -15,8 +17,6 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form"
-import { Textarea } from "./ui/textarea"
-import { ReloadIcon } from "@radix-ui/react-icons"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Nome inválido" }),
@@ -36,9 +36,23 @@ export function FormSendMessage() {
     }
   })
 
+  const { toast } = useToast()
+
   async function handleSubmit(values: z.infer<typeof formSchema>) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log({ values })
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    toast({
+      title: "Modifique o onSubmit para a sua aplicação",
+      description: (
+        <>
+          Dados enviados:
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(values, null, 2)}
+            </code>
+          </pre>
+        </>
+      )
+    })
   }
 
   return (
@@ -114,7 +128,12 @@ export function FormSendMessage() {
         />
 
         <div className="flex flex-wrap gap-2">
-          <Button type="reset" variant="outline" className="flex-grow basis-40">
+          <Button
+            className="flex-grow basis-40"
+            variant="outline"
+            type="reset"
+            onClick={() => form.reset()}
+          >
             Limpar
           </Button>
 
