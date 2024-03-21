@@ -8,7 +8,7 @@ A simple template to understand how to submit a form, with verification of the p
 
 1. Clone the repository
 2. Install the dependencies with `npm install`
-3. Run the development server with `npm run dev`
+3. Run in development mode with `npm run dev`
 
 ## Dependencies
 
