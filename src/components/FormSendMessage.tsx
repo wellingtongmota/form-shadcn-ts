@@ -16,6 +16,7 @@ import {
   FormMessage
 } from "@/components/ui/form"
 import { Textarea } from "./ui/textarea"
+import { ReloadIcon } from "@radix-ui/react-icons"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Nome inválido" }),
@@ -36,6 +37,7 @@ export function FormSendMessage() {
   })
 
   async function handleSubmit(values: z.infer<typeof formSchema>) {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
     console.log({ values })
   }
 
@@ -115,8 +117,20 @@ export function FormSendMessage() {
           <Button type="reset" variant="outline" className="flex-grow basis-40">
             Limpar
           </Button>
-          <Button type="submit" className="flex-grow basis-40">
-            Enviar
+
+          <Button
+            type="submit"
+            className="flex-grow basis-40"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? (
+              <>
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Enviando
+              </>
+            ) : (
+              "Enviar"
+            )}
           </Button>
         </div>
       </form>
